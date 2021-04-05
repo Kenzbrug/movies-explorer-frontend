@@ -1,0 +1,11 @@
+@import url(./vender/normalize.css);
+@import url(./vender/fonts/font.css);
+
+
+
+.body {
+    padding: 0;
+    margin: 0 auto;
+    max-width: 1280px;
+    min-width: 320px;
+}

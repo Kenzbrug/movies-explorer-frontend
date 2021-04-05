@@ -1,0 +1,144 @@
+.techs {
+    padding: 100px 70px;
+    background: #F5F5F5;
+}
+
+.techs__header {
+    font-family: 'Inter', Arial, sans-serif;
+    font-style: normal;
+    font-weight: 400;
+    font-size: 22px;
+    line-height: 1.21;
+    border-bottom: solid 1px #000;
+}
+
+.techs__header-title {
+    margin: 0 0 23px;
+}
+
+.techs__container {
+    text-align: center;
+}
+
+.techs__title {
+    font-family: 'Inter', Arial, sans-serif;
+    font-style: normal;
+    font-weight: 400;
+    font-size: 50px;
+    line-height: 1.16;
+    margin: 90px 0 0;
+}
+
+.techs__subtitle {
+    font-family: 'Inter', Arial, sans-serif;
+    font-style: normal;
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 1.43;
+    margin: 0 auto ;
+    max-width: 460px;
+}
+
+.techs__steck {
+    /* display: flex; */
+    justify-content: center;
+    margin: 100px 0 0;
+}
+
+.techs__steck-links {
+    font-family: 'Inter', Arial, sans-serif;
+    font-style: normal;
+    font-weight: 500;
+    font-size: 14px;
+    line-height: 1.21;
+
+    display: grid;
+    grid-template-columns: repeat(auto-fit, 90px); 
+    grid-template-rows: repeat(auto-fit, 60px);
+    gap: 10px;
+    list-style: none;
+    justify-content: center;
+    margin: 0;
+    padding: 0;    
+    
+}
+
+.techs__steck-list {
+    background: #E8E8E8;
+    border-radius: 10px;
+    line-height: 60px;    
+}
+
+.techs__steck-link {
+    color: #000;
+    text-decoration: none;
+    justify-self: end;
+}
+
+.techs__steck-link:hover {
+    opacity: 0.7;
+    transition: 0.2s ease-in-out;
+}
+
+@media screen and (max-width: 915px) {
+    .techs {
+        padding: 90px 50px;
+    }
+}
+
+@media screen and (max-width: 830px) {
+    .techs {
+        padding: 90px 30px;
+    }
+}
+
+@media screen and (max-width: 800px) {
+    .techs__steck-links {
+        grid-template-columns: repeat(auto-fit, 84px); 
+        grid-template-rows: repeat(auto-fit, 57px);
+    }
+}
+
+@media screen and (max-width: 768px) {
+   
+    .techs__title {
+        margin: 80px 0 22px;
+    }
+    .techs__steck {
+        margin: 83px 0 0;
+    }
+}
+
+@media screen and (max-width: 650px) {
+    .techs__title {
+        font-size: 40px;
+    }
+    .aboutme__resume-name {
+        font-size: 30px;
+    }
+}
+
+@media screen and (max-width: 500px) {
+    .techs {
+        padding: 70px 18px;
+    }
+}
+
+@media screen and (max-width: 320px) {
+    .techs__header-title {
+        font-size: 18px;
+        margin-bottom: 28px;
+    }
+    .techs__title {
+        font-size: 30px;
+        line-height: 1.21;
+        margin: 60px 0 24px;
+    }
+    .techs__subtitle {
+        font-size: 11px;
+    }
+
+    .techs__steck {
+        margin: 50px 50px 0;
+    }
+}
