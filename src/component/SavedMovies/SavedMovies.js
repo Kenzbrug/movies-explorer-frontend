@@ -1,10 +1,15 @@
 import './SavedMovies.css'
 
 import MoviesCardList from '../MoviesCardList/MoviesCardList'
+import SearchForm from '../SearchForm/SearchForm'
 
 function SavedMovies({ movies, location }) {
     return (
-        <MoviesCardList movies={movies} location={location} />
+        <section className='seved-movies' >
+            <SearchForm />
+            <MoviesCardList movies={movies} location={location} />
+        </section>
+
     )
 }
 

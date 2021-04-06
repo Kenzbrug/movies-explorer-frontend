@@ -85,6 +85,11 @@
     color: #000;
 }
 
+.navigation__home-page-button:hover {
+    opacity: 0.7;
+    transition: 0.2s ease-in-out;
+}
+
 .navigation__films-button {
     font-size: 13px;
     line-height: 1.385;
@@ -93,11 +98,20 @@
     color: #000;
 }
 
+.navigation__films-button:hover {
+    opacity: 0.7;
+    transition: 0.2s ease-in-out;
+}
+
 .navigation__savefilms-button {
     font-size: 13px;
     line-height: 1.385;
     text-decoration: none;
     color: #000;
+}
+.navigation__savefilms-button:hover {
+    opacity: 0.7;
+    transition: 0.2s ease-in-out;
 }
 
 .navigation__account-button {
@@ -107,6 +121,10 @@
     margin: 3px 0;
     text-decoration: none;
     color: #000;
+}
+.navigation__account-button:hover {
+    opacity: 0.7;
+    transition: 0.2s ease-in-out;
 }
 
 .navigation__page-is-active {

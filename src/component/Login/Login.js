@@ -10,9 +10,9 @@ function Login() {
             </p>
             <form className='signin__form'>
                 <p className='signin__placeholder'>E-mail</p>
-                <input className='signin__form-input' required id='email' name='email' type='email' />
+                <input className='signin__form-input' required autocomplete="off" id='email' name='email' type='email' />
                 <p className='signin__placeholder'>Пароль</p>
-                <input className='signin__form-input' required id='password' name='password' type='password' />
+                <input className='signin__form-input' required autocomplete="off" id='password' name='password' type='password' />
 
                 <div className='signin__button-container'>
                     <button type='submit' className='signin__button' tupe='button'>Войти</button>

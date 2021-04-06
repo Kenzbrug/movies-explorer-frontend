@@ -7,8 +7,7 @@ function SearchForm() {
             <div className='search-form__container'>
                 <form className='search-form__form'>
                     <div className="search-form__input-container">
-                        <input className='search-form__input' size='16'
-                            type="text" placeholder='Фильм' autoComplete="off" required>
+                        <input className='search-form__input' type="text" placeholder='Фильм' autoComplete="off" required>
                         </input>
                         <div className='search-form__button-container'>
                             <button className='search-form__button'

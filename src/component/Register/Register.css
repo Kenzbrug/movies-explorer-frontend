@@ -44,6 +44,10 @@
     outline: none;
     width: 100%;
 }
+.signup__form-input:focus {
+    transition: 0.2s ease-in-out;
+    border-bottom: 2px solid #2BE080;
+}
 
 .signup__button-container {
     padding: 110px 0 0;
