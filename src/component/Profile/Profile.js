@@ -2,7 +2,7 @@ import { Route, Link } from 'react-router-dom';
 import './Profile.css'
 
 
-function Profile({ userData }) {
+function Profile({ userData, onSignOut }) {
     return (
         <section className="profile">
             <p className="profile__welcome">
@@ -20,7 +20,9 @@ function Profile({ userData }) {
                 <Link className='profile__button-edit' to='/editprofile'>
                     Редактировать
                 </Link>
-                <Link className='profile__button-signout' to='/'>Выйти из аккаунта</Link>
+                <button className='profile__button-signout' onClick={onSignOut}>
+                    Выйти из аккаунта
+                </button>
             </Route>
         </section >
     )

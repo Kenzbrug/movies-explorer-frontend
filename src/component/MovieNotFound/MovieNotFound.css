@@ -1,0 +1,33 @@
+.movie-not-found {
+    display: flex;
+    justify-content: center;
+    padding-top: 40px;
+}
+
+.movie-not-found__title {
+    font-family: 'Inter', Arial, sans-serif;
+    font-style: normal;
+    font-weight: 400;
+    font-size: 20px;
+    line-height: 1.21;
+    margin: 0;
+}
+
+
+@media screen and (max-width: 768px) {
+    .movie-not-found__title {
+        font-size: 17px;
+    }
+}
+
+@media screen and (max-width: 500px) {
+    .movie-not-found__title {
+        font-size: 14px;
+    }
+}
+
+@media screen and (max-width: 320px) {
+    .movie-not-found__title {
+        font-size: 12px;
+    }
+}

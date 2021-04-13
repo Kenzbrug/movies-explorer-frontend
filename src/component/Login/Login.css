@@ -70,6 +70,16 @@
     color: #fff;
 }
 
+.signin__button_disabled {
+    background: #d4d2d2;
+    cursor: default;
+}
+
+.signin__button_disabled:hover {
+    opacity: 1;
+    transition: none;
+}
+
 .signin__button:hover {
     opacity: 0.7;
     transition: 0.2s ease-in-out;
