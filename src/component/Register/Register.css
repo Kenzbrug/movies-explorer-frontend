@@ -74,6 +74,15 @@
     transition: 0.2s ease-in-out;
 }
 
+.signup__button_disabled {
+    background: #d4d2d2;
+    cursor: default;
+}
+
+.signup__button_disabled:hover {
+    opacity: 1;
+    transition: none;
+}
 .signup__signin-container {
     display: flex;
     align-items: center;

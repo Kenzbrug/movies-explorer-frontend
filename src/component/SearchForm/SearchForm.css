@@ -16,7 +16,6 @@
 .search-form__input-container {
     position: relative;
     display: flex;
-    border: 1.5px solid rgba(170, 170, 170, 0.2);
     border-radius: 50px;
     height: 48px;
     margin: 0;
@@ -31,6 +30,7 @@
     font-weight: 400;
     font-size: 14px;
     line-height: 1.21;
+    box-shadow: 0 0 0 2px rgba(170, 170, 170, 0.2);
     border-radius: 50px;
     border: none;
     outline: none;
@@ -46,6 +46,17 @@
 
 .search-form__input::placeholder {
     opacity: 0.2;
+}
+
+.search-form__input-enter-empty {
+    box-shadow: 0 0 0 2px rgba(255, 48, 85, 1);
+}
+.search-form__input-enter-empty:focus{
+    box-shadow: 0 0 0 2px rgba(255, 48, 85, 1);
+}
+.search-form__input-enter-empty-placeHolder::placeholder {
+    opacity: 1;
+    color: #FF3055;
 }
 
 .search-form__button-container {
