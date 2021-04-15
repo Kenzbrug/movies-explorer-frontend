@@ -2,13 +2,16 @@ import './SearchForm.css'
 import { useState, createRef } from 'react';
 import searchImgButton from '../../images/search-img-button.svg'
 
-function SearchForm({ getResultSearchFilm, onShortFilm }) {
+function SearchForm({ getResultSearchInputFilm, onShortFilm, location }) {
     const [searchFilm, setSearchFilm] = useState('');
     const [placeholder, setPlaceHolder] = useState(
         'Фильм'
     );
+
     const [isPlaceholderShow, setPlaceholderShow] = useState(false);
     const inputRef = createRef();
+    const jwt = localStorage.getItem('jwt')
+
     const handleSubmit = (e) => {
         e.preventDefault();
         if (searchFilm.trim().length === 0) {
@@ -16,7 +19,8 @@ function SearchForm({ getResultSearchFilm, onShortFilm }) {
             setPlaceholderShow(true)
             inputRef.current.focus()
         } else {
-            getResultSearchFilm(searchFilm)
+            console.log(getResultSearchInputFilm);
+            getResultSearchInputFilm(searchFilm, jwt, location)
             setSearchFilm('')
         }
     }
@@ -38,20 +42,22 @@ function SearchForm({ getResultSearchFilm, onShortFilm }) {
         if (longFilmOn === true) {
             setlongFilmOn(false)
             return onShortFilm(false)
-        } else { 
+        } else {
             setlongFilmOn(true)
             return onShortFilm(true)
-        
+
         }
 
-        
+
     }
     return (
         <section className="search-form">
             <div className='search-form__container'>
                 <form className='search-form__form' onSubmit={handleSubmit}>
                     <div className='search-form__input-container'>
-                        <input className={`search-form__input ${isPlaceholderShow ? 'search-form__input-enter-empty search-form__input-enter-empty-placeHolder' : ''}`}
+                        <input className={`search-form__input ${isPlaceholderShow ?
+                            'search-form__input-enter-empty search-form__input-enter-empty-placeHolder' : ''}`
+                        }
                             value={searchFilm}
                             onChange={handleChangeSearchInput}
                             onBlur={handleEmptySearchQuery}
@@ -62,7 +68,7 @@ function SearchForm({ getResultSearchFilm, onShortFilm }) {
                         </input>
                         <div className='search-form__button-container'>
                             <button className='search-form__button'
-                                type="submit" aria-label="Найти фильм"></button>
+                                type="submit" aria-label="Найти фильм" onSubmit={handleSubmit}></button>
                             <img className="search-form__img-button" src={searchImgButton} alt='' />
                         </div>
                     </div>

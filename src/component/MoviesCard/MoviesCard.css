@@ -84,8 +84,8 @@
 
 @media screen and (max-width: 915px) {
     .movie__img {
-        width: 349px;
-        height: 195px;
+        width: 339px;
+        height: 190px;
     }
     .movie__conteiner-like {
         margin-bottom: 15px;
@@ -95,10 +95,10 @@
     }
 } 
 
-@media screen and (max-width: 768px) {
+@media screen and (max-width: 767px) {
     .movie__img {
-        width: 339px;
-        height: 190px;
+        width: 325px;
+        height: 182px;
     }
 } 
 

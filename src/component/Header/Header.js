@@ -6,7 +6,6 @@ import Navigation from '../Navigation/Navigation'
 
 function Header({ location, loggedIn }) {
     const [clickMenu, setClickMenu] = useState(false);
-
     function handleClickMenu() {
         setClickMenu(!clickMenu)
     }

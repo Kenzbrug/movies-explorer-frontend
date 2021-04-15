@@ -3,29 +3,31 @@ import './MoviesCard.css'
 import { urlWithMovies } from '../../utils/utils'
 
 function MoviesCard({ movie, location, clickLikeButton, savesUserMovie, removeMovie }) {
-
-    const secondsToHms = (time) => {
+    const movieLikeButtonClassName = ('movie__button movie__button_like movie__button_like_active')
+    const movieDeleteButtonClassName = ('movie__button movie__button_delete')
+    const secondsToHM = (time) => {
         let h = Math.floor(time / 60);
         let m = Math.floor(time % 60);
 
-        let hDisplay = h > 0 ? h + (h === 1 ? " час " : " часа ") : "";
-        let mDisplay = m > 0 ? m + (m === 1 ? " мин " : " мин ") : "";
+        let hDisplay = h > 0 ? h + 'ч ' : '';
+        let mDisplay = m > 0 ? m + 'м ' : '';
 
         return hDisplay + mDisplay;
     }
 
     const handleClickLikeButton = () => {
-        // проверка на дублирование
-        // если мы уже поставили like, второй раз фильм не появится в сохраненных
+        // если есть like, то убираем like и удаляем из сохраненных
         if (handlebuttonLikeActive()) {
             savesUserMovie.forEach((saveMovie) => {
                 if (saveMovie.nameRU === movie.nameRU) {
                     removeMovie(saveMovie._id)
                 }
             })
+            // добавляем фильм в сохраненные
+        } else {
+            clickLikeButton({ ...movie })
         }
-        // добавляем фильм в сохраненные
-        clickLikeButton({ ...movie })
+
     }
 
     const handleClickDeleteButton = () => {
@@ -37,10 +39,6 @@ function MoviesCard({ movie, location, clickLikeButton, savesUserMovie, removeMo
             return e.nameRU.includes(movie.nameRU);
         });
     }
-    console.log(movie);
-
-    const movieLikeButtonClassName = ('movie__button movie__button_like movie__button_like_active')
-    const movieDeleteButtonClassName = ('movie__button movie__button_delete')
     return (
         <li className="movie">
             <a href={location === '/saved-movies' ? movie.trailer : movie.trailerLink} target='blank' className='movie__trailer'>
@@ -56,7 +54,7 @@ function MoviesCard({ movie, location, clickLikeButton, savesUserMovie, removeMo
                         onClick={location === '/saved-movies' ? handleClickDeleteButton : handleClickLikeButton}>
                     </button>
                 </div>
-                <p className='movie__time'>{secondsToHms(movie.duration)}</p>
+                <p className='movie__time'>{secondsToHM(movie.duration)}</p>
             </div>
         </li>
     );

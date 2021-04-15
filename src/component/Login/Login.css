@@ -28,6 +28,10 @@
     font-weight: 400;
     font-size: 10px;
     line-height: 1;
+    margin: 24px 0 0;
+}
+
+.signin__placeholder:first-child {
     margin: 0;
 }
 
@@ -39,10 +43,18 @@
     line-height: 1.21;
     border: none;
     border-bottom: 1px solid #E8E8E8;
-    margin-bottom: 24px;
     padding: 5px 0 10px 0;
     outline: none;
     width: 100%;
+}
+
+.signin__form-input-error {
+    font-family: 'Inter', Arial, sans-serif;
+    font-style: normal;
+    font-weight: 400;
+    font-size: 10px;
+    line-height: 1.21;
+    color: #EE3465;
 }
 
 .signin__form-input:focus {
@@ -50,7 +62,19 @@
 }
 
 .signin__button-container {
+    display: flex;
+    flex-direction: column;
     padding: 197px 0 0;
+}
+.signin__res-server-error {
+    font-family: 'Inter', Arial, sans-serif;
+    font-style: normal;
+    font-weight: 400;
+    font-size: 11px;
+    line-height: 1.21;
+    color: #FF004C;
+    text-align: center;
+    margin-bottom: 10px;
 }
 
 .signin__button {

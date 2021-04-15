@@ -1,12 +1,12 @@
 import './Editprofile.css'
-import { useContext, useState } from "react";
+import { useContext, useState, useEffect } from "react";
 import CurrentUserContext from '../../contexts/CurrentUserContext'
 
-function Editprofile({ onUpdateUser }) {
+function Editprofile({ onUpdateUser, resError }) {
     const currentUser = useContext(CurrentUserContext)
     const [name, setName] = useState('')
     const [email, setEmail] = useState('')
-    console.log(currentUser);
+    const [textResErorr, setTextResErorr] = useState('')
 
     //забираем значения инпутов 
     const handleNameChange = (e) => {
@@ -24,6 +24,11 @@ function Editprofile({ onUpdateUser }) {
         });
     }
 
+    useEffect(() => {
+        if (resError === 409) setTextResErorr('Пользователь с таким email уже существует. ')
+        else if (resError === 400) setTextResErorr('При обновлении профиля произошла ошибка.')
+    }, [resError])
+
     return (
         <section className='editprofile'>
             <form onSubmit={handleSubmit} className='editprofile__form'>
@@ -37,7 +42,13 @@ function Editprofile({ onUpdateUser }) {
                     <input className='editprofile__userdata-input' placeholder='Введите почту'
                         autoComplete="off" required type='email' defaultValue={currentUser.email} onChange={handleEmailChange} />
                 </div>
-                <button onSubmit={handleSubmit} type='submit' className='editprofile__button-save' tupe='button'>Сохранить</button>
+                <div className='editprofile__button-container'>
+                    {/* {resError ? (<span className='signin__res-server-error'>{textResErorr || ''}</span>) : (<></>)} */}
+
+                    <span className='editprofile__res-server-error'>{textResErorr || ''}</span>
+                    <button onSubmit={handleSubmit} type='submit' className='editprofile__button-save' tupe='button'>Сохранить</button>
+                </div>
+
             </form>
         </section>
     )

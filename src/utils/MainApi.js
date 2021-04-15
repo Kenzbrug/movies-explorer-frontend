@@ -1,9 +1,9 @@
 import { MAIN_API } from './utils'
-import {urlWithMovies} from './utils'
+import { urlWithMovies } from './utils'
 const { URL } = MAIN_API
 
 const handleRes = (res) => {
-    return res.ok ? res.json() : Promise.reject({ error: res.status, message: res.message })
+    return res.ok ? res.json() : Promise.reject({ error: res.status, message: res })
 }
 
 
@@ -20,7 +20,6 @@ export const getContent = (token) => {
 };
 
 export const register = (name, email, password) => {
-    console.log(`${URL}/signup`);
     return fetch(`${URL}/signup`, {
         method: 'POST',
         headers: {
@@ -62,7 +61,6 @@ export const setProfileInfo = (inputData) => {
 }
 
 export const savedMovie = (movieData, jwt) => {
-    console.log(movieData);
     return fetch(`${URL}/movies`, {
         method: 'POST',
         headers: {
@@ -71,7 +69,7 @@ export const savedMovie = (movieData, jwt) => {
             Authorization: `Bearer ${jwt}`,
         },
         body: JSON.stringify({
-            
+
             country: movieData.country,
             director: movieData.director,
             duration: movieData.duration,
@@ -90,6 +88,7 @@ export const savedMovie = (movieData, jwt) => {
 };
 
 export const getSavedMovie = (jwt) => {
+    console.log('меня вызвали, getSavedMovie')
     return fetch(`${URL}/movies`, {
         method: 'GET',
         headers: {
@@ -102,15 +101,15 @@ export const getSavedMovie = (jwt) => {
 };
 
 export const removeMovie = (id, jwt) => {
-    return fetch(`${URL}/articles/${id}`, {
-      method: 'DELETE',
-      headers: {
-        Accept: 'application/json',
-        'Content-Type': 'application/json',
-        Authorization: `Bearer ${jwt}`,
-      },
+    return fetch(`${URL}/movies/${id}`, {
+        method: 'DELETE',
+        headers: {
+            Accept: 'application/json',
+            'Content-Type': 'application/json',
+            Authorization: `Bearer ${jwt}`,
+        },
     }).then((res) => handleRes(res))
-  };
+};
 
 
 

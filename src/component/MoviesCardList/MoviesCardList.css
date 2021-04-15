@@ -44,7 +44,7 @@
  
 @media screen and (max-width: 915px) {
     .movies-list__lists {
-        grid-template-columns: repeat(auto-fit, 349px);
+        grid-template-columns: repeat(auto-fit, 339px);
         grid-gap: 30px;
     }
 }  
@@ -54,9 +54,13 @@
     .movies-list {
         padding-top: 70px;
     }
+}  
+
+@media screen and (max-width: 767px) {
+   
     .movies-list__lists {
-        grid-template-columns: repeat(auto-fit, 339px);
-        grid-gap: 30px;
+        grid-template-columns: repeat(auto-fit, 325px);
+        grid-gap: 25px;
     }
 }  
 

@@ -18,15 +18,15 @@ import ProtectedRoute from '../ProtectedRoute/ProtectedRoute';
 import CurrentUserContext from '../../contexts/CurrentUserContext'
 
 function App() {
-    const { pathname } = useLocation();
+    const { pathname } = useLocation()
     const [loggedIn, setLoggedIn] = useState(false);
-    // const [likeMovies, setSaveMovies] = useState([])
     const [currentUser, setCurrentUser] = useState('')
     const [savesUserMovie, setSaveUserMovies] = useState([]);
     const [userData, setUserData] = useState({
         name: '',
         email: ''
     })
+    const [responseServerError, setResponseServerError] = useState(null)
 
     const history = useHistory()
 
@@ -52,29 +52,29 @@ function App() {
             })
     }
 
-    const handleRegister = (userData) => {
-        const { name, email, password } = userData
+    const onRegister = (name, email, password) => {
         return MainApi.register(name, email, password)
             .then((res) => {
                 console.log(res);
-                history.push('/signin')
+                history.push('/movies')
+                setResponseServerError(null)
             })
             .catch((err) => {
-                console.log(err);
+                if (err.error === 409) setResponseServerError(409)
+                else if (err.error === 400) setResponseServerError(400)
+
+                console.log(err.error);
                 // return new Error('Ошибка введенных данных')
             })
     }
 
-    const handleLogin = (dataInput) => {
-        console.log(dataInput);
-        const { email, password } = dataInput
+    const onLogin = (email, password) => {
         return MainApi.authorize(email, password)
             .then((data) => {
-                console.log(data);
                 if (data.token) {
                     setLoggedIn(true)
                     localStorage.setItem('jwt', data.token)
-                    window.location.reload()
+                    // window.location.reload()
                     // проверяем токен для отрисовки нужного email в header
                     handleTokenCheck(localStorage.getItem('jwt'))
                     history.push('/movies')
@@ -84,6 +84,9 @@ function App() {
                 // }
             })
             .catch((err) => {
+                if (err.error === 401) setResponseServerError(401)
+                else if (err.error === 403) setResponseServerError(403)
+
                 console.log(err);
                 // return new Error('Ошибка введенных данных')
             })
@@ -91,24 +94,28 @@ function App() {
 
     const hendleSignOut = () => {
         localStorage.removeItem('jwt')
+        localStorage.removeItem('movies')
         history.push('/')
         setSaveUserMovies([])
     }
 
     const handleUpdateUser = (profileData) => {
+        console.log(profileData);
         MainApi.setProfileInfo(profileData)
             .then((saveProfileData) => {
+                console.log(saveProfileData);
                 //обновляем state профиля в контексте
                 setCurrentUser(saveProfileData)
-                window.location.reload()
+                // window.location.reload()
             })
             .catch((err) => {
+                if (err.error === 409) setResponseServerError(409)
+                else if (err.error === 400) setResponseServerError(400)
                 console.log(err);
                 // return new Error('Ошибка введенных данных')
             })
     }
     const handleSaveMovie = (movieData) => {
-        console.log(movieData);
         const jwt = localStorage.getItem('jwt');
         MainApi.savedMovie(movieData, jwt)
             .then(() => {
@@ -143,7 +150,7 @@ function App() {
 
     useEffect(() => {
         if (loggedIn) {
-            const jwt = localStorage.getItem('token');
+            const jwt = localStorage.getItem('jwt');
             getSevedMoviesCard(jwt);
         }
     }, [loggedIn, history]);
@@ -173,10 +180,10 @@ function App() {
                 <Header location={pathname} loggedIn={loggedIn} />
                 <Switch>
                     <Route exact path='/signin'>
-                        <Login onLogin={handleLogin} />
+                        <Login onLogin={onLogin} resError={responseServerError} />
                     </Route>
                     <Route exact path='/signup'>
-                        <Register onRegister={handleRegister} />
+                        <Register onRegister={onRegister} resError={responseServerError} />
                     </Route>
                     <Route exact path='/'>
                         <Main />
@@ -189,6 +196,7 @@ function App() {
                         loggedIn={loggedIn}
                         component={Movies}
                         location={pathname}
+
                         clickLikeButton={handleSaveMovie}
                         savesUserMovie={savesUserMovie}
                         removeMovieMain={removeSaveMovie}
@@ -199,6 +207,7 @@ function App() {
                         loggedIn={loggedIn}
                         component={SavedMovies}
                         location={pathname}
+
                         savesUserMovie={savesUserMovie}
                         removeMovie={removeSaveMovie}
 
@@ -210,12 +219,14 @@ function App() {
                         userData={userData}
                         onSignOut={hendleSignOut}
 
+
                     />
                     <ProtectedRoute
                         exect path='/editprofile'
                         loggedIn={loggedIn}
                         component={Editprofile}
                         onUpdateUser={handleUpdateUser}
+                        resError={responseServerError}
                     />
                     <Route path="*">
                         <Redirect to="/" />

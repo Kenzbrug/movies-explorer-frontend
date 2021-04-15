@@ -2,18 +2,32 @@ import { useState, useEffect, useMemo } from "react";
 
 import './MoviesCardList.css'
 import MoviesCard from '../MoviesCard/MoviesCard'
-
+import { useWindowSize } from '../../hooks/useWindowSize';
 
 function MoviesCardList({ movies, location, clickLikeButton, savesUserMovie, removeMovie }) {
     const [countMovies, setCountMovies] = useState(12);
-    let locationName = location.pathname
-    
+    const windowSize = useWindowSize();
+
+    console.log(movies);
+
     const addMoreMovies = () => {
-        setCountMovies(countMovies + 6)
+        if (windowSize > 768) {
+            setCountMovies(countMovies + 3)
+        } else if (windowSize <= 768) {
+            setCountMovies(countMovies + 2)
+        }
     }
+
     useEffect(() => {
-        locationName === '/movies' ? setCountMovies(12) : setCountMovies(movies.length);
-    }, [movies, locationName]);
+        if (windowSize > 768) {
+            setCountMovies(12);
+        } else if (windowSize <= 768 && windowSize > 480) {
+            setCountMovies(8);
+        } else if (windowSize <= 480) {
+            setCountMovies(5);
+        }
+
+    }, [windowSize, movies]);
 
     const lengthDisplayMovies = useMemo(() => {
         return countMovies >= movies.length ? 'movies-list__button_hidden' : '';
@@ -24,17 +38,16 @@ function MoviesCardList({ movies, location, clickLikeButton, savesUserMovie, rem
             <ul className="movies-list__lists">
                 {/* отрисовываем карточки */}
                 {movies.slice(0, countMovies).map((movie, index) => {
-                    return (<MoviesCard key={index} movie={movie} location={locationName}
-                         clickLikeButton={clickLikeButton}
-                          savesUserMovie={savesUserMovie}
-                          removeMovie={removeMovie}
-                          />)
+                    return (<MoviesCard key={index} movie={movie} location={location}
+                        clickLikeButton={clickLikeButton}
+                        savesUserMovie={savesUserMovie}
+                        removeMovie={removeMovie}
+                    />)
                 })}
             </ul>
             <button type="button" aria-label="показать ещё фильмы" onClick={addMoreMovies} className={
-                locationName === '/movies' ? `movies-list__button-more ${lengthDisplayMovies}` : 'movies-list__button-more movies-list__button_hidden'
-            }
-            >
+                location === '/movies' ? `movies-list__button-more ${lengthDisplayMovies}` : 'movies-list__button-more movies-list__button_hidden'
+            }>
                 Ещё
             </button>
         </div>

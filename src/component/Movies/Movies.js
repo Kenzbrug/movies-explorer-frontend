@@ -5,61 +5,53 @@ import Preloader from '../Preloader/Preloader'
 import MoviesCardList from '../MoviesCardList/MoviesCardList'
 import MovieNotFound from '../MovieNotFound/MovieNotFound'
 import { getMovie } from '../../utils/MoviesApi'
+import { SearchMovies } from '../../utils/SearchMovies'
 
 function Movies({ location, clickLikeButton, savesUserMovie, removeMovieMain }) {
-    const [isPreloaderShow, setPreloaderShow] = useState(false);
-    const [movies, setMovies] = useState([]);
-    const [isMovieNotFound, setIsMovieNotFound] = useState(false)
-    const [shortFilms, setShortFilms] = useState(true)
+    const {
+        getResultSearchFilm,
+        isPreloaderShow,
+        setShortFilms,
+        movies,
+        setMovies, // потом удалить
+        isMovieNotFound,
+    } = SearchMovies()
 
-    console.log(shortFilms);
+    const getLocation = location.pathname
+    // нужно удалить
 
-    const getResultSearchFilm = (enterFilm) => {
-        setMovies([]);
-        setIsMovieNotFound(false)
-        setPreloaderShow(true);
+    const getMovies = () => {
         getMovie()
-            .then((arrayMovies) => {
-                const filterMovies = arrayMovies.filter((film) => {
-                    return film.nameRU.includes(enterFilm);
-                })
-                console.log(filterMovies);
-                if (filterMovies.length === 0) return setIsMovieNotFound(true)
-                filterMovies.forEach((getMovie) => {
-                    //short film, покажу только короткие
-                    if (!shortFilms && getMovie.duration <= 40) {
-                        return setMovies(filterMovies)
-                        //найденный фильм длинее 40, я его не покажу
-                    } else if (!shortFilms && getMovie.duration > 40) {
-                        return setIsMovieNotFound(true)
-                        //'short film отключен, покажу любую длину'
-                    } else if (shortFilms) {
-                        return setMovies(filterMovies)
-                    }
-                })
-                localStorage.setItem('movies', JSON.stringify(filterMovies));
+            .then((res) => {
+                console.log(res);
+                setMovies(res)
             })
-            .finally(() => {
-                setPreloaderShow(false);
-            });
     }
+    console.log(movies);
 
     useEffect(() => {
-        const lastRequest = localStorage.getItem('movies');
-        if (lastRequest) {
-            setMovies(JSON.parse(lastRequest));
-        }
+        //нужно удалить
+        getMovies()
+
+        //нужно раскомитить
+
+        // const lastRequest = localStorage.getItem('movies');
+        // if (lastRequest) {
+        //     setMovies(JSON.parse(lastRequest));
+        // }
     }, []);
 
     return (
         <section className='movies'>
-            <SearchForm getResultSearchFilm={getResultSearchFilm} onShortFilm={setShortFilms} />
+            <SearchForm location={getLocation} getResultSearchInputFilm={getResultSearchFilm} onShortFilm={setShortFilms} />
             <Preloader isShow={isPreloaderShow} />
             {movies.length > 0 ? (<MoviesCardList movies={movies}
-                location={location}
+                location={getLocation}
                 clickLikeButton={clickLikeButton}
-                savesUserMovie={savesUserMovie}
                 removeMovie={removeMovieMain}
+
+                savesUserMovie={savesUserMovie}
+
             />) :
                 (<></>)}
             {isMovieNotFound ? <MovieNotFound /> : <></>}
