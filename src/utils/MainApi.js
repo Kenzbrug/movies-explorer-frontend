@@ -20,6 +20,7 @@ export const getContent = (token) => {
 };
 
 export const register = (name, email, password) => {
+    console.log(name, email, password);
     return fetch(`${URL}/signup`, {
         method: 'POST',
         headers: {
@@ -32,7 +33,6 @@ export const register = (name, email, password) => {
 }
 
 export const authorize = (email, password) => {
-    console.log(email, password);
     return fetch(`${URL}/signin`, {
         method: 'POST',
         headers: {
@@ -88,7 +88,6 @@ export const savedMovie = (movieData, jwt) => {
 };
 
 export const getSavedMovie = (jwt) => {
-    console.log('меня вызвали, getSavedMovie')
     return fetch(`${URL}/movies`, {
         method: 'GET',
         headers: {
@@ -110,122 +109,3 @@ export const removeMovie = (id, jwt) => {
         },
     }).then((res) => handleRes(res))
 };
-
-
-
-// const config = {
-//     url: "https://api.mestoken.students.nomoredomains.icu",
-
-
-//     headers: {
-//         'Accept': 'application/json',
-//         "Content-Type": "application/json",
-//         authorization: `Bearer ${localStorage.getItem('jwt')}`
-//     }
-// }
-
-// const handleResponse = (res) => {
-//     if (!res.ok) {
-//         throw new Error('Данные введены неверно')
-//     } 
-//     return res.json()
-// }
-
-// class Api {
-//     constructor(config) {
-//         this._headers = config.headers
-//         this._url = config.url
-//         this._cohort = config.cohort
-//     }
-//     //запрос на отрисовку карточек 
-//     getCardList() {
-//         return fetch(`${this._url}/cards`, {
-//             headers: this._headers
-//         }).then(handleResponse)
-//     }
-//     //запрос на создание новой карточки
-//     createCard(data) {
-//         return fetch(`${this._url}/cards`, {
-//             method: "POST",
-//             headers: this._headers,
-//             body: JSON.stringify({
-//                 name: data.name,
-//                 link: data.link,
-//             })
-//         })
-//         .then((res) => {
-//             if (!res.ok) {
-//                 throw new Error('Данные введены неверно')
-//             } 
-//             return res.json()
-//         })
-//     }
-
-//     //запрос на изменение данных профайла
-//     setUserInfo(inputData) {
-//         return fetch(`${this._url}/users/me`, {
-//             method: "PATCH",
-//             headers: this._headers,
-//             body: JSON.stringify({
-//                 name: inputData.name,
-//                 about: inputData.about
-//             })
-//         })
-//         // .then(handleResponse)
-//         .then((res) => {
-//             if (!res.ok) {
-//                 throw new Error('Данные введены неверно')
-//             } 
-//             return res.json()
-//         })
-//     }
-
-//     //забираем данные профайла с сервера
-//     getProfileInfo() {
-//         return fetch(`${this._url}/users/me`, {
-//             headers: this._headers,
-//         })
-//         .then(handleResponse)
-//     }
-
-//     //удаляем карточку
-//     setCardDelete(cardId) {
-//         return fetch(`${this._url}/cards/${cardId}`, {
-//             method: "DELETE",
-//             headers: this._headers,
-//         })
-//             .then(handleResponse)
-//     }
-
-//     //запрос на удаление/добавление лайка
-//     changeLikeCardStatus(cardId, LikeState) {
-//         const method = LikeState ? "PUT" : "DELETE"
-//         return fetch(`${this._url}/cards/${cardId}/likes`, {
-//             method,
-//             headers: this._headers,
-//         })
-//             .then(handleResponse)
-//     }
-
-//     //редактирвоание аватара
-//     setUserAvatar(inputData) {
-//         return fetch(`${this._url}/users/me/avatar`, {
-//             method: "PATCH",
-//             headers: this._headers,
-//             body: JSON.stringify({
-//                 avatar: inputData.avatar,
-//             })
-//         })
-//         // .then(handleResponse)
-//         .then((res) => {
-//             if (!res.ok) {
-//                 throw new Error('Данные введены неверно')
-//             } 
-//             return res.json()
-//         })
-//     }
-// }
-
-// const api = new Api(config)
-
-// export default api

@@ -1,7 +1,7 @@
 import './Navigation.css'
 import { Link, NavLink } from 'react-router-dom'
 
-function Navigation({ location, clickMenu, handleClickMenu, handleCloseClickMenu }) {
+function Navigation({ location, clickMenu, handleClickMenu, handleCloseClickMenu, loggedIn }) {
     if (location === '/signin') {
         return ('')
     } else if (location === '/signup') {
@@ -17,7 +17,7 @@ function Navigation({ location, clickMenu, handleClickMenu, handleCloseClickMenu
                     : 'navigation__menu_active '} 
              ${clickMenu ? 'navigation__menu-item-close' : ''}`} onClick={handleClickMenu}>
             </div>
-            {location === '/' ?
+            {!loggedIn === true ?
                 (<div className='navigation__container'>
                     <Link className='navigation__signup-button' to='/signup'>
                         Регистрация
@@ -32,11 +32,11 @@ function Navigation({ location, clickMenu, handleClickMenu, handleCloseClickMenu
                             <ul className='navigation__lists'>
                                 <li className='navigation__list'>
                                     {clickMenu ? (
-                                        <li className='navigation__list'>
+                                        <div className='navigation__list'>
                                             <NavLink activeClassName='navigation__page-is-active' onClick={handleCloseClickMenu} className={`navigation__home-page-button `} exact to='/'>
                                                 Главная
                                             </NavLink>
-                                        </li>) : ('')}
+                                        </div>) : ('')}
                                     <NavLink activeClassName='navigation__page-is-active' onClick={handleCloseClickMenu} className='navigation__films-button' to='/movies'>
                                         Фильмы
                                      </NavLink>

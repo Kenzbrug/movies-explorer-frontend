@@ -19,7 +19,6 @@ function SearchForm({ getResultSearchInputFilm, onShortFilm, location }) {
             setPlaceholderShow(true)
             inputRef.current.focus()
         } else {
-            console.log(getResultSearchInputFilm);
             getResultSearchInputFilm(searchFilm, jwt, location)
             setSearchFilm('')
         }
@@ -45,9 +44,7 @@ function SearchForm({ getResultSearchInputFilm, onShortFilm, location }) {
         } else {
             setlongFilmOn(true)
             return onShortFilm(true)
-
         }
-
 
     }
     return (

@@ -23,11 +23,11 @@ function Movies({ location, clickLikeButton, savesUserMovie, removeMovieMain }) 
     const getMovies = () => {
         getMovie()
             .then((res) => {
-                console.log(res);
+              
                 setMovies(res)
             })
     }
-    console.log(movies);
+
 
     useEffect(() => {
         //нужно удалить

@@ -7,7 +7,6 @@ const handleRes = (res) => {
 };
 
 export const getMovie = () => {
-    console.log('меня вызвали, getMovie');
     return fetch(
         'https://api.nomoreparties.co/beatfilm-movies',
         {

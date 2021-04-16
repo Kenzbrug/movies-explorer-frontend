@@ -5,8 +5,8 @@ import { Link } from 'react-router-dom';
 import './Register.css'
 
 import { useFormValidation } from '../../hooks/useFormValidation';
-import { validateEmail, validateName } from '../../utils/utils'
-import { useInput } from '../../hooks/useFormValidation';
+import { validateEmail, validateName } from '../../hooks/useFormValidation'
+// import { useInput } from '../../hooks/useFormValidation';
 
 function Register({ onRegister, resError }) {
 
@@ -35,6 +35,7 @@ function Register({ onRegister, resError }) {
         resetForm();
     }, [resetForm]);
 
+
     const handleSubmit = (e) => {
         e.preventDefault();
         const { name, email, password } = values;
@@ -42,58 +43,54 @@ function Register({ onRegister, resError }) {
             if (validateName(name)) {
                 onRegister(name, email, password);
             } else {
+                setIsValid(false)
                 console.log('что-то пошло не так в имени');
             }
         } else {
+            setIsValid(false)
             console.log('что-то пошло не так в почте');
         }
-
     }
 
-    const name = useInput('', { isEmpty: true, minLength: 3, isName: true })
-    // console.log(name.nameError);
-    console.log(name.inputValid);
     return (
         <section className='signup'>
             <p className='signup__welcome'>
                 Добро пожаловать!
             </p>
             <form ref={validation} onSubmit={handleSubmit} className='signup__form' noValidate>
+               
                 <p className='signup__placeholder'>Имя</p>
-
                 <input className='signup__form-input' required autoComplete='off' id='name' name='name' type='name'
-                    value={name.value}
-                    onChange={e => name.onChange(e)}
-                    onBlur={e => name.onBlur(e)}
-
-
-
-                    maxLength='30' />
-                {(name.isDirty && name.isEmpty) && <span className='signup__form-input-error'>поле не должно быть пустым.</span>}
-                {(name.isDirty && name.nameError) && <span className='signup__form-input-error'> Поле должно содержать то и то.</span>}
-                {(name.isDirty && name.minLengthError) && <span className='signup__form-input-error'> Должно быть больше 6 символов.</span>}
-                {/* <span className='signup__form-input-error'>{errors.name || ''}{nameError}</span> */}
-
-
+                    value={values.name || ''}
+                    onChange={handleInputChange}
+                    maxLength='30' />               
+                <span className='signup__form-input-error'>{errors.name || ''}</span>
+                
                 <p className='signup__placeholder'>E-mail</p>
-
-                <input className='signup__form-input' autoComplete='off' id='email' name='email' type='email'
-                    value={values.email || ''} onChange={handleInputChange} />
+                <input className='signup__form-input' required autoComplete='off' id='email' name='email' type='email'
+                    value={values.email || ''}
+                     onChange={handleInputChange}
+                      />
                 <span className='signup__form-input-error'>{errors.email || ''}</span>
 
                 <p className='signup__placeholder'>Пароль</p>
-
-                <input className='signup__form-input' id='password' autoComplete='off' name='password' type='password'
-                    value={values.password || ''} onChange={handleInputChange} />
+                <input className='signup__form-input' required id='password' autoComplete='off' name='password' type='password'
+                    value={values.password || ''}
+                     onChange={handleInputChange}
+                      />
                 <span className='signup__form-input-error'>{errors.password || ''}</span>
 
+
+
+
                 <div className='signup__button-container'>
-                    {/* {resError ? (<span className='signup__res-server-error'>{textResErorr || ''}</span>) : (<></>)} */}
-                    <span className='signup__res-server-error'>{textResErorr || ''}</span>
-                    {/* <button disabled={!isValid} type='submit' onSubmit={handleSubmit}
-                        className={`signup__button ${isValid ? '' : 'signup__button_disabled'}`}>Зарегистрироваться</button> */}
-                    <button disabled={!name.inputValid} type='submit' onSubmit={handleSubmit}
-                        className={`signup__button ${name.inputValid ? '' : 'signup__button_disabled'}`}>Зарегистрироваться</button>
+
+                    {resError ? (<span className='signup__res-server-error'>{textResErorr || ''}</span>) : (<></>)}
+                    {/* <span className='signup__res-server-error'>{textResErorr || ''}</span> */}
+
+                    <button disabled={!isValid} type='submit' onSubmit={handleSubmit}
+                        className={`signup__button ${isValid ? '' : 'signup__button_disabled'}`}>Зарегистрироваться</button>
+                    
                 </div>
             </form>
             <div className='signup__signin-container'>

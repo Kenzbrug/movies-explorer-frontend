@@ -7,10 +7,11 @@ import { getSavedMovie } from './MainApi'
 export function SearchMovies() {
     const [isPreloaderShow, setPreloaderShow] = useState(false);
     const [movies, setMovies] = useState([]);
-    const [saveMovies, setSaveMovies] = useState([]);
+    const [saveAlreadyMovies, setSaveAlreadyMovies] = useState([]);
     const [isMovieNotFound, setIsMovieNotFound] = useState(false)
     const [shortFilms, setShortFilms] = useState(true)
-    console.log(movies);
+    const [searchInSaveMovies, setSearchInSaveMovies] = useState(true)
+
 
     const getResultSearchFilm = (enterFilm, location) => {
         setMovies([]);
@@ -42,30 +43,26 @@ export function SearchMovies() {
     }
 
     const getREsultSearchSaveFilm = (enterFilm, jwt) => {
-        setSaveMovies([]);
+        setSearchInSaveMovies(false)
+        setSaveAlreadyMovies([]);
         setIsMovieNotFound(false)
         setPreloaderShow(true);
         getSavedMovie(jwt)
             .then((arrayMovies) => {
-                console.log(arrayMovies);
                 const filterMovies = arrayMovies.filter((film) => {
                     return film.nameRU.includes(enterFilm);
                 })
-                console.log(filterMovies);
                 if (filterMovies.length === 0) return setIsMovieNotFound(true)
                 filterMovies.forEach((getMovie) => {
                     //short film, покажу только короткие
                     if (!shortFilms && getMovie.duration <= 40) {
-                        console.log('1');
-                        return setSaveMovies(filterMovies)
+                        return setSaveAlreadyMovies(filterMovies)
                         //найденный фильм длинее 40, я его не покажу
                     } else if (!shortFilms && getMovie.duration > 40) {
-                        console.log('2');
                         return setIsMovieNotFound(true)
                         //'short film отключен, покажу любую длину'
                     } else if (shortFilms) {
-                        console.log('3');
-                        return setSaveMovies(filterMovies)
+                        return setSaveAlreadyMovies(filterMovies)
                     }
                 })
             })
@@ -82,6 +79,8 @@ export function SearchMovies() {
         setMovies, // потом удалить
         isMovieNotFound,
         getREsultSearchSaveFilm,
-        saveMovies
+        saveAlreadyMovies,
+        searchInSaveMovies,
+        
     }
 }

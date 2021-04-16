@@ -4,11 +4,10 @@ import './MoviesCardList.css'
 import MoviesCard from '../MoviesCard/MoviesCard'
 import { useWindowSize } from '../../hooks/useWindowSize';
 
-function MoviesCardList({ movies, location, clickLikeButton, savesUserMovie, removeMovie }) {
+function MoviesCardList({movies, location, clickLikeButton, savesUserMovie, removeMovie }) {
     const [countMovies, setCountMovies] = useState(12);
     const windowSize = useWindowSize();
-
-    console.log(movies);
+  
 
     const addMoreMovies = () => {
         if (windowSize > 768) {

@@ -2,7 +2,7 @@ import { createRef, useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import './Login.css'
 import { useFormValidation } from '../../hooks/useFormValidation';
-import { validateEmail } from '../../utils/utils'
+import { validateEmail } from '../../hooks/useFormValidation'
 
 
 function Login({ onLogin, resError }) {

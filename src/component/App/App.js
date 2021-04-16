@@ -54,10 +54,14 @@ function App() {
 
     const onRegister = (name, email, password) => {
         return MainApi.register(name, email, password)
-            .then((res) => {
-                console.log(res);
-                history.push('/movies')
-                setResponseServerError(null)
+            .then((data) => {
+                if (data.token) {
+                    setLoggedIn(true)
+                    localStorage.setItem('jwt', data.token)
+                    handleTokenCheck(localStorage.getItem('jwt'))
+                    history.push('/movies')
+                    setResponseServerError(null)
+                }
             })
             .catch((err) => {
                 if (err.error === 409) setResponseServerError(409)
@@ -74,14 +78,10 @@ function App() {
                 if (data.token) {
                     setLoggedIn(true)
                     localStorage.setItem('jwt', data.token)
-                    // window.location.reload()
-                    // проверяем токен для отрисовки нужного email в header
                     handleTokenCheck(localStorage.getItem('jwt'))
                     history.push('/movies')
+                    setResponseServerError(null)
                 }
-                //  else if (data.message || data.error) {
-                //     return new Error('Ошибка введенных данных')
-                // }
             })
             .catch((err) => {
                 if (err.error === 401) setResponseServerError(401)
@@ -96,6 +96,7 @@ function App() {
         localStorage.removeItem('jwt')
         localStorage.removeItem('movies')
         history.push('/')
+        window.location.reload()
         setSaveUserMovies([])
     }
 
@@ -127,6 +128,7 @@ function App() {
     };
 
     const getSevedMoviesCard = (jwt) => {
+        console.log('getSevedMoviesCard');
         MainApi.getSavedMovie(jwt)
             .then((moviesCard) => {
                 setSaveUserMovies(moviesCard.reverse())
@@ -157,6 +159,7 @@ function App() {
 
 
     useEffect(() => {
+        console.log('useEffect1');
         const jwt = localStorage.getItem('jwt')
         if (jwt) {
             handleTokenCheck(jwt)
@@ -166,6 +169,7 @@ function App() {
 
     // проверяем залогинены мы или нет, чтобы перенаправить на главную страницу с поиском фильмов
     useEffect(() => {
+        console.log('useEffect2');
         if (loggedIn) {
             const jwt = localStorage.getItem('jwt')
             getSevedMoviesCard(jwt)

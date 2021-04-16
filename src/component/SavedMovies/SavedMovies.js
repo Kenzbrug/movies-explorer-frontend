@@ -1,11 +1,10 @@
 import './SavedMovies.css'
-// import { useEffect } from 'react';
-// import {useHistory} from 'react-router-dom';
 
 import MoviesCardList from '../MoviesCardList/MoviesCardList'
 import SearchForm from '../SearchForm/SearchForm'
 import Preloader from '../Preloader/Preloader'
 import { SearchMovies } from '../../utils/SearchMovies'
+import MovieNotFound from '../MovieNotFound/MovieNotFound'
 
 function SavedMovies({
     location,
@@ -18,15 +17,18 @@ function SavedMovies({
         isPreloaderShow,
         getREsultSearchSaveFilm,
         setShortFilms,
+        isMovieNotFound,
+        saveAlreadyMovies,
+        searchInSaveMovies,
     } = SearchMovies()
-
+  
     return (
         <section className='seved-movies' >
             <SearchForm getResultSearchInputFilm={getREsultSearchSaveFilm} location={getLocation} onShortFilm={setShortFilms} />
             <Preloader isShow={isPreloaderShow} />
             {savesUserMovie.length > 0 ? (
                 <MoviesCardList
-                    movies={savesUserMovie}
+                    movies={searchInSaveMovies ? savesUserMovie : saveAlreadyMovies}
                     location={getLocation}
                     loggedIn={loggedIn}
                     removeMovie={removeMovie}
@@ -34,6 +36,7 @@ function SavedMovies({
                 />
             ) :
                 <></>}
+            {isMovieNotFound ? <MovieNotFound /> : <></>}
         </section>
 
     )
