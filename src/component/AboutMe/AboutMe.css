@@ -1,0 +1,275 @@
+.aboutme {
+    padding: 110px 70px 85px;
+}
+
+.aboutme__header {
+    font-family: 'Inter', Arial, sans-serif;
+    font-style: normal;
+    font-weight: 400;
+    font-size: 22px;
+    line-height: 1.21;
+    border-bottom: solid 1px #000;
+}
+
+.aboutme__header-title {
+    margin: 0 0 23px;
+}
+
+.aboutme__container {
+    display: flex;
+    justify-content: space-between;
+    padding-top: 66px;
+}
+
+.aboutme__about-student {
+    display: flex;
+    justify-content: space-between;
+    flex-direction: column;
+    max-width: 600px;
+}
+
+.aboutme__resume {
+    display: flex;
+    flex-direction: column;
+}
+
+.aboutme__resume-name {
+    font-family: 'Inter', Arial, sans-serif;
+    font-style: normal;
+    font-weight: 400;
+    font-size: 50px;
+    line-height: 1.16;
+    margin: 0;
+}
+
+.aboutme__resume-subtitle {
+    font-family: 'Inter', Arial, sans-serif;
+    font-style: normal;
+    font-weight: 500;
+    font-size: 18px;
+    line-height: 1.11;
+    margin: 18px 0 26px;
+}
+
+.aboutme__resume-description {
+    font-family: 'Inter', Arial, sans-serif;
+    font-style: normal;
+    font-weight: 500;
+    font-size: 14px;
+    line-height: 1.57;
+    margin: 0;
+    max-width: 600px;
+}
+
+.aboutme__contacts-links {
+    font-family: 'Inter', Arial, sans-serif;
+    font-style: normal;
+    font-weight: 500;
+    font-size: 14px;
+    line-height: 1.21;
+    display: flex;
+    list-style: none;
+    padding: 0;
+    margin: 20px 0 0 0;
+}
+
+.aboutme__contacts-link {
+    color: #000;
+    text-decoration: none;
+    margin-right: 10px;
+}
+
+.aboutme__contacts-link:hover {
+    opacity: 0.7;
+    transition: 0.2s ease-in-out;
+}
+
+.aboutme__myfoto {
+    background-size: cover; 
+    border-radius: 10px;
+    background-position: center;
+}
+
+.aboutme__foto {
+    width: 270px;
+    height: 327px;
+    margin-left: 49px;
+}
+
+.aboutme__gotoportfolio-title{
+    font-family: 'Inter', Arial, sans-serif;
+    font-style: normal;
+    font-weight: 400;
+    font-size: 18px;
+    line-height: 1.111;
+    margin: 100px 0 30px;
+    color: #A0A0A0;
+}
+
+.aboutme__gotoportfolio-links {
+    font-family: 'Inter', Arial, sans-serif;
+    font-style: normal;
+    font-weight: 500;
+    font-size: 30px;
+    line-height: 1.666;
+    display: flex;
+    list-style: none;
+    flex-direction: column;
+    margin: 0;
+    padding: 0;
+}
+
+.aboutme__gotoportfolio-link {
+    color: #000;
+    text-decoration: none;
+}
+
+.aboutme__gotoportfolio-link:hover {
+    opacity: 0.7;
+    transition: 0.2s ease-in-out;
+}
+
+.aboutme__gotoportfolio-list {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 20px;
+    padding-bottom: 19px;
+    border-bottom: solid 1px #E8E8E8;
+}
+
+.aboutme__gotoportfolio-list:last-child{
+    border-bottom: none;
+    padding-bottom:0px;
+}
+.aboutme__icon {
+    margin: auto 0;
+    width: 18px;
+    height: 17px;
+}
+
+@media screen and (max-width: 915px) {
+    .aboutme {
+        padding: 90px 50px;
+    }
+}
+
+@media screen and (max-width: 768px) {
+    .aboutme {
+        padding: 90px 50px;
+    }
+    .aboutme__gotoportfolio-links {
+        font-size: 28px;
+    }
+    .aboutme__resume-name {
+        font-size: 40px;
+    }
+    .aboutme__resume-subtitle {
+        font-size: 12px;
+        margin: 16px 0 20px;
+    }
+    .aboutme__resume-description {
+        font-size: 12px;
+    }
+    .aboutme__foto {
+        width: 255px;
+        height: 307px;
+    }
+    .aboutme__myfoto {
+        width: 255px;
+        height: 307px;
+    }
+    .aboutme__gotoportfolio-title {
+        margin: 90px 0 31px;
+    }
+    .aboutme__icon {
+        width: 16px;
+        height: 16px;
+    }
+}
+
+@media screen and (max-width: 830px) {
+    .aboutme {
+        padding: 70px 30px;
+    }
+}
+
+@media screen and (max-width: 600px) {
+    .aboutme__container {
+        padding-top: 60px;
+        flex-direction: column-reverse;
+    }
+    .aboutme__foto {
+        width: 292px;
+        height: 352px;
+        margin: 0 auto;
+    }
+    .aboutme__myfoto {
+        width: 292px;
+        height: 352px;
+    }
+
+    .aboutme__resume-name {
+        margin: 40px 0 0 0;
+    }
+    .aboutme__gotoportfolio-links {
+        font-size: 22px;
+    }
+}
+
+@media screen and (max-width: 500px) {
+    .aboutme {
+        padding: 70px 14px;
+    }
+}
+
+@media screen and (max-width: 430px) {
+    .aboutme__gotoportfolio-links {
+        font-size: 20px;
+    }
+}
+
+@media screen and (max-width: 320px) {
+    .aboutme__header {
+        font-size: 18px;
+    }    
+    .aboutme__header-title {
+        margin-bottom: 28px;
+    }
+
+    .aboutme__resume-name {
+        font-size: 30px;
+        line-height: 1.21;
+    }
+    .aboutme__resume-subtitle {
+        font-size: 11px;
+        line-height: 1.45;
+        margin: 20px 0;
+    }
+
+    .aboutme__resume-description {
+        font-size: 11px;
+        line-height: 1.45;
+    }
+
+    .aboutme__contacts {
+        margin-top: 40px;
+    }
+    .aboutme__contacts {
+        margin-right: 26px;
+    }
+
+    .aboutme__gotoportfolio-title {
+        font-size: 14px;
+        line-height: 1.42;
+        margin: 69px 0 20px;
+    }
+
+    .aboutme__gotoportfolio-links {
+        font-size: 18px;
+        line-height: 1.55;
+    }
+    .aboutme__icon {
+        width: 11px;
+        height: 11px;
+    }
+}

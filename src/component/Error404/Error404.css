@@ -1,0 +1,77 @@
+.error404 {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 246px 0 60px;
+}
+
+.error404__title {
+    font-family: 'Inter', Arial, sans-serif;
+    font-style: normal;
+    font-weight: 400;
+    font-size: 140px;
+    line-height: 1.21;
+    margin: 0 0 5px;
+}
+
+.error404__subtitle {
+    font-family: 'Inter', Arial, sans-serif;
+    font-style: normal;
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 1.21;
+    margin: 0 0 184px;
+}
+
+.error404__button {
+    font-family: 'Inter', Arial, sans-serif;
+    font-style: normal;
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 1.21;
+    margin: 0;
+    color: #2BE080;
+    border: none;
+    outline: none;
+    background: #fff;
+    cursor: pointer;
+    text-decoration: none;
+}
+
+.error404__button:hover {
+    opacity: 0.7;
+    transition: 0.2s ease-in-out;
+}
+
+@media screen and (max-width: 768px) {
+    .error404 {
+        padding: 408px 0 222px;
+    }
+}
+
+@media screen and (max-width: 500px) {
+    .error404 {
+        padding: 329px 0 30px;
+    }
+    .error404__subtitle {
+        margin-bottom: 284px;
+    }
+    .error404__title {
+        font-size: 110px;
+    }
+}
+
+@media screen and (max-width: 320px) {
+    .error404__title {
+        font-size: 80px;
+        margin-bottom: 10px;
+    }
+
+    .error404__subtitle {
+        font-size: 12px;
+    }
+
+    .error404__button {
+        font-size: 12px;
+    }
+}

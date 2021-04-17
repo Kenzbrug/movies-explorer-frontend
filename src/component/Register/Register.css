@@ -1,0 +1,136 @@
+.signup {
+    padding: 0 0 70px;
+    display: flex;
+    flex-direction: column;
+    width: 396px;
+    margin: auto;
+}
+
+.signup__logo {
+    width: 38px;
+    height: 38px;
+    margin-bottom: 40px;
+}
+
+.signup__welcome {
+    font-family: 'Inter', Arial, sans-serif;
+    font-style: normal;
+    font-weight: 500;
+    font-size: 24px;
+    line-height: 1.21;
+    margin: 0 0 40px 0;
+}
+
+.signup__placeholder {
+    color: #A0A0A0;
+    font-family: 'Inter', Arial, sans-serif;
+    font-style: normal;
+    font-weight: 400;
+    font-size: 10px;
+    line-height: 1;
+    margin: 0;
+}
+
+.signup__form-input {
+    font-family: 'Inter', Arial, sans-serif;
+    font-style: normal;
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 1.21;
+    border: none;
+    border-bottom: 1px solid #E8E8E8;
+    margin-bottom: 24px;
+    padding: 5px 0 10px 0;
+    outline: none;
+    width: 100%;
+}
+.signup__form-input:focus {
+    transition: 0.2s ease-in-out;
+    border-bottom: 2px solid #2BE080;
+}
+
+.signup__button-container {
+    padding: 110px 0 0;
+}
+
+.signup__button {
+    font-family: 'Inter', Arial, sans-serif;
+    font-style: normal;
+    font-weight: 500;
+    font-size: 14px;
+    line-height: 1.21;
+    width: 100%;
+    padding: 13px 0 15px 0;
+    border: none;
+    outline: none;
+    cursor: pointer;
+    background: #2BE080;
+    border-radius: 3px;
+    color: #fff;
+}
+
+.signup__button:hover {
+    opacity: 0.7;
+    transition: 0.2s ease-in-out;
+}
+
+.signup__button_disabled {
+    background: #d4d2d2;
+    cursor: default;
+}
+
+.signup__button_disabled:hover {
+    opacity: 1;
+    transition: none;
+}
+.signup__signin-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    color: #A0A0A0;
+    font-family: 'Inter', Arial, sans-serif;
+    font-style: normal;
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 1.21;
+    margin-top: 16px;
+}
+
+.signup__question-signup {
+    margin: 0;
+}
+
+.signup__login-link {
+    cursor: pointer;
+    color: #2BE080;
+    text-decoration: none;
+    margin-left: 6px;
+}
+
+.signup__login-link:hover {
+    opacity: 0.7;
+    transition: 0.2s ease-in-out;
+}
+
+
+@media screen and (max-width: 500px) {
+    .signup {
+        padding: 0 30px 30px;
+        width: auto;
+    }
+    .signup__welcome {
+        margin-bottom: 80px;
+        text-align: center;
+    }
+    .signup__button-container {
+        padding-top: 285px;
+    }
+    .signup__question-signup {
+        font-size: 12px;
+    }
+    
+    .signup__login-link {
+        font-size: 12px;
+    }
+}

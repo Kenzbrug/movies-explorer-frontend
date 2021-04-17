@@ -1,0 +1,134 @@
+.movie {
+    display: flex;
+    flex-direction: column;
+    position: relative;
+}
+
+.movie__img {
+    width: 364px;
+    height: 203px;
+    background-repeat: no-repeat;
+    background-position: center;
+    object-fit: cover;
+    object-position: center;
+    border-radius: 10px 10px 0 0;
+}
+
+.movie__container-footer {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    border-radius: 0 0 6px 6px;
+    box-sizing: border-box;
+    box-shadow: 0px 4px 30px rgba(0, 0, 0, 0.08);
+    padding: 16px 24px 16px 16px;
+}
+
+.movie__conteiner-like{
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 17px;
+}
+
+.movie__footer-title {
+    font-family: 'Inter', Arial, sans-serif;
+    font-style: normal;
+    font-weight: 500;
+    font-size: 13px;
+    line-height: 1.21;
+    margin: 0;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+}
+
+.movie__button {
+    border: none;
+    padding: 0;
+    outline: none;
+    padding: 9px 10px;
+    margin: 0;
+    color: white;
+}
+
+.movie__button_like {
+    background: url(../../images/movie-footer-heart.svg) center no-repeat;
+}
+
+.movie__button_like_active {
+    background: url(../../images/movie-footer-heart-active.svg) center no-repeat;
+}
+
+.movie__button_delete {
+    background: url(../../images/movie-footer-button-delete.svg) center no-repeat;
+    opacity: 0;
+    
+}
+
+.movie__button:hover {
+    opacity: 0.8;
+    cursor: pointer;
+}
+
+.movie__time {
+    font-family: 'Inter', Arial, sans-serif;
+    font-style: normal;
+    font-weight: 400;
+    font-size: 11px;
+    line-height: 1.21;
+    margin: 0;
+    color: #A0A0A0;
+}
+
+@media screen and (max-width: 915px) {
+    .movie__img {
+        width: 349px;
+        height: 195px;
+    }
+    .movie__conteiner-like {
+        margin-bottom: 15px;
+    }
+    .movie__container-footer {
+        padding: 14px;
+    }
+} 
+
+@media screen and (max-width: 768px) {
+    .movie__img {
+        width: 339px;
+        height: 190px;
+    }
+} 
+
+@media screen and (max-width: 500px) {
+    .movie__img {
+        width: 320px;
+        height: 179px;
+    }
+}
+
+@media screen and (max-width: 350px) {
+    .movie__img {
+        width: 300px;
+        height: 168px;
+    }
+}
+
+@media screen and (max-width: 320px) {
+    .movie__footer-title {
+        font-size: 12px;
+    }
+    .movie__time {
+        font-size: 10px;
+    }
+    .movie__conteiner-like {
+        margin-bottom: 14px;
+    }
+    .movie__button_like {
+        width: 14px;
+        height: 12px;
+    }
+
+}
