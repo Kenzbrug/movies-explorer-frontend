@@ -26,6 +26,12 @@
     border-bottom: none;
 }
 
+.editprofile_container-input {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+}
+
 .editprofile__placeholder {
     font-family: 'Inter', Arial, sans-serif;
     font-style: normal;
@@ -44,8 +50,8 @@
     border: none;
     outline: none;
     padding: 0;
-    width: 50%;
     margin: 0 10px 0 22px;
+    text-align: end;
 }
 
 .editprofile__button-container {
@@ -61,6 +67,17 @@
     font-size: 11px;
     line-height: 1.21;
     color: #FF004C;
+    text-align: center;
+    margin-bottom: 10px;
+}
+
+.signin__res-server-ok {
+    font-family: 'Inter', Arial, sans-serif;
+    font-style: normal;
+    font-weight: 400;
+    font-size: 11px;
+    line-height: 1.21;
+    color: #2BE080;
     text-align: center;
     margin-bottom: 10px;
 }
@@ -85,6 +102,16 @@
 .editprofile__button-save:hover {
     opacity: 0.8;
     transition: 0.2s ease-in-out;
+}
+
+.editprofile__button_disabled {
+    background: #d4d2d2;
+    cursor: default;
+}
+
+.editprofile__button_disabled:hover {
+    opacity: 1;
+    transition: none;
 }
 
 @media screen and (max-width: 500px) {
