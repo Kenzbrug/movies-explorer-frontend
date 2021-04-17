@@ -1,5 +1,5 @@
-import "./MoviesCard.css";
-import { urlWithMovies } from "../../utils/utils";
+import './MoviesCard.css';
+import { urlWithMovies } from '../../utils/utils';
 
 function MoviesCard({
   movie,
@@ -9,14 +9,14 @@ function MoviesCard({
   removeMovie,
 }) {
   const movieLikeButtonClassName =
-    "movie__button movie__button_like movie__button_like_active";
-  const movieDeleteButtonClassName = "movie__button movie__button_delete";
+    'movie__button movie__button_like movie__button_like_active';
+  const movieDeleteButtonClassName = 'movie__button movie__button_delete';
   const secondsToHM = (time) => {
-    let h = Math.floor(time / 60);
-    let m = Math.floor(time % 60);
+    const h = Math.floor(time / 60);
+    const m = Math.floor(time % 60);
 
-    let hDisplay = h > 0 ? h + "ч " : "";
-    let mDisplay = m > 0 ? m + "м " : "";
+    const hDisplay = h > 0 ? h + 'ч ' : '';
+    const mDisplay = m > 0 ? m + 'м ' : '';
 
     return hDisplay + mDisplay;
   };
@@ -45,16 +45,16 @@ function MoviesCard({
     });
   };
   return (
-    <li className="movie">
+    <li className='movie'>
       <a
-        href={location === "/saved-movies" ? movie.trailer : movie.trailerLink}
-        target="blank"
-        className="movie__trailer"
+        href={location === '/saved-movies' ? movie.trailer : movie.trailerLink}
+        target='blank'
+        className='movie__trailer'
       >
         <img
-          className="movie__img"
+          className='movie__img'
           src={
-            location === "/saved-movies"
+            location === '/saved-movies'
               ? movie.image
               : `${urlWithMovies}${movie.image.url}`
           }
@@ -62,27 +62,27 @@ function MoviesCard({
         />
       </a>
 
-      <div className="movie__container-footer">
-        <div className="movie__conteiner-like">
-          <h2 className="movie__footer-title">{movie.nameRU}</h2>
+      <div className='movie__container-footer'>
+        <div className='movie__conteiner-like'>
+          <h2 className='movie__footer-title'>{movie.nameRU}</h2>
           <button
             className={
-              location === "/saved-movies"
+              location === '/saved-movies'
                 ? movieDeleteButtonClassName
                 : handlebuttonLikeActive()
                 ? movieLikeButtonClassName
-                : "movie__button movie__button_like"
+                : 'movie__button movie__button_like'
             }
-            type="button"
-            aria-label="кнопка-сердечко, нравится"
+            type='button'
+            aria-label='кнопка-сердечко, нравится'
             onClick={
-              location === "/saved-movies"
+              location === '/saved-movies'
                 ? handleClickDeleteButton
                 : handleClickLikeButton
             }
           ></button>
         </div>
-        <p className="movie__time">{secondsToHM(movie.duration)}</p>
+        <p className='movie__time'>{secondsToHM(movie.duration)}</p>
       </div>
     </li>
   );

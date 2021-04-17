@@ -1,5 +1,6 @@
 const MAIN_API = {
-  URL: "https://api.vzh.release.students.nomoredomains.icu",
+  URL: "http://localhost:3020",
+  //   URL: 'https://api.vzh.release.students.nomoredomains.icu'
 };
 const urlWithMovies = "https://api.nomoreparties.co";
 

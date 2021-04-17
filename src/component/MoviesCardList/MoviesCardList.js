@@ -1,8 +1,8 @@
-import { useState, useEffect, useMemo } from "react";
+import { useState, useEffect, useMemo } from 'react';
 
-import "./MoviesCardList.css";
-import MoviesCard from "../MoviesCard/MoviesCard";
-import { useWindowSize } from "../../hooks/useWindowSize";
+import './MoviesCardList.css';
+import MoviesCard from '../MoviesCard/MoviesCard';
+import { useWindowSize } from '../../hooks/useWindowSize';
 
 function MoviesCardList({
   movies,
@@ -33,17 +33,17 @@ function MoviesCardList({
   }, [windowSize, movies]);
 
   const lengthDisplayMovies = useMemo(() => {
-    return countMovies >= movies.length ? "movies-list__button_hidden" : "";
+    return countMovies >= movies.length ? 'movies-list__button_hidden' : '';
   }, [countMovies, movies]);
 
   return (
-    <div className="movies-list">
-      <ul className="movies-list__lists">
+    <div className='movies-list'>
+      <ul className='movies-list__lists'>
         {/* отрисовываем карточки */}
         {movies.slice(0, countMovies).map((movie, index) => {
           return (
             <MoviesCard
-              key={index}
+              key={movie._id}
               movie={movie}
               location={location}
               clickLikeButton={clickLikeButton}
@@ -54,13 +54,13 @@ function MoviesCardList({
         })}
       </ul>
       <button
-        type="button"
-        aria-label="показать ещё фильмы"
+        type='button'
+        aria-label='показать ещё фильмы'
         onClick={addMoreMovies}
         className={
-          location === "/movies"
+          location === '/movies'
             ? `movies-list__button-more ${lengthDisplayMovies}`
-            : "movies-list__button-more movies-list__button_hidden"
+            : 'movies-list__button-more movies-list__button_hidden'
         }
       >
         Ещё

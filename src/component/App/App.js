@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect } from 'react';
 import {
   Route,
   Switch,
@@ -6,32 +6,32 @@ import {
   Redirect,
   useLocation,
   useHistory,
-} from "react-router-dom";
-import Main from "../Main/Main";
-import Header from "../Header/Header";
-import Footer from "../Footer/Footer";
-import Login from "../Login/Login";
-import Register from "../Register/Register";
-import Profile from "../Profile/Profile";
-import Editprofile from "../Editprofile/Editprofile";
-import Error404 from "../Error404/Error404";
-import Movies from "../Movies/Movies";
-import SavedMovies from "../SavedMovies/SavedMovies";
-import * as MainApi from "../../utils/MainApi";
+} from 'react-router-dom';
+import Main from '../Main/Main';
+import Header from '../Header/Header';
+import Footer from '../Footer/Footer';
+import Login from '../Login/Login';
+import Register from '../Register/Register';
+import Profile from '../Profile/Profile';
+import Editprofile from '../Editprofile/Editprofile';
+import Error404 from '../Error404/Error404';
+import Movies from '../Movies/Movies';
+import SavedMovies from '../SavedMovies/SavedMovies';
+import * as MainApi from '../../utils/MainApi';
 
-import ProtectedRoute from "../ProtectedRoute/ProtectedRoute";
+import ProtectedRoute from '../ProtectedRoute/ProtectedRoute';
 
 // подписываемся на контекст
-import CurrentUserContext from "../../contexts/CurrentUserContext";
+import CurrentUserContext from '../../contexts/CurrentUserContext';
 
 function App() {
   const { pathname } = useLocation();
   const [loggedIn, setLoggedIn] = useState(false);
-  const [currentUser, setCurrentUser] = useState("");
+  const [currentUser, setCurrentUser] = useState('');
   const [savesUserMovie, setSaveUserMovies] = useState([]);
   const [userData, setUserData] = useState({
-    name: "",
-    email: "",
+    name: '',
+    email: '',
   });
   const [responseServerError, setResponseServerError] = useState(null);
   const [infoStatus, setInfoStatus] = useState(false);
@@ -51,7 +51,7 @@ function App() {
           // обновляем стейт данных пользователя
           setUserData(getUserData);
           // при удачной проверке перебрасываем на главную страницу
-          history.push("/movies");
+          history.push('/movies');
         }
       })
       .catch((err) => {
@@ -64,9 +64,9 @@ function App() {
       .then((data) => {
         if (data.token) {
           setLoggedIn(true);
-          localStorage.setItem("jwt", data.token);
-          handleTokenCheck(localStorage.getItem("jwt"));
-          history.push("/movies");
+          localStorage.setItem('jwt', data.token);
+          handleTokenCheck(localStorage.getItem('jwt'));
+          history.push('/movies');
           setResponseServerError(null);
         }
       })
@@ -83,9 +83,9 @@ function App() {
       .then((data) => {
         if (data.token) {
           setLoggedIn(true);
-          localStorage.setItem("jwt", data.token);
-          handleTokenCheck(localStorage.getItem("jwt"));
-          history.push("/movies");
+          localStorage.setItem('jwt', data.token);
+          handleTokenCheck(localStorage.getItem('jwt'));
+          history.push('/movies');
           setResponseServerError(null);
         }
       })
@@ -97,9 +97,9 @@ function App() {
   };
 
   const hendleSignOut = () => {
-    localStorage.removeItem("jwt");
-    localStorage.removeItem("movies");
-    history.push("/");
+    localStorage.removeItem('jwt');
+    localStorage.removeItem('movies');
+    history.push('/');
     window.location.reload();
     setSaveUserMovies([]);
   };
@@ -123,7 +123,7 @@ function App() {
       });
   };
   const handleSaveMovie = (movieData) => {
-    const jwt = localStorage.getItem("jwt");
+    const jwt = localStorage.getItem('jwt');
     MainApi.savedMovie(movieData, jwt)
       .then(() => {
         getSevedMoviesCard(jwt);
@@ -144,7 +144,7 @@ function App() {
   };
 
   const removeSaveMovie = (id) => {
-    const jwt = localStorage.getItem("jwt");
+    const jwt = localStorage.getItem('jwt');
     MainApi.removeMovie(id, jwt)
       .then((res) => {
         //перерисовываем карточки
@@ -157,13 +157,13 @@ function App() {
 
   useEffect(() => {
     if (loggedIn) {
-      const jwt = localStorage.getItem("jwt");
+      const jwt = localStorage.getItem('jwt');
       getSevedMoviesCard(jwt);
     }
   }, [loggedIn, history]);
 
   useEffect(() => {
-    const jwt = localStorage.getItem("jwt");
+    const jwt = localStorage.getItem('jwt');
     if (jwt) {
       handleTokenCheck(jwt);
     }
@@ -173,33 +173,34 @@ function App() {
   // проверяем залогинены мы или нет, чтобы перенаправить на главную страницу с поиском фильмов
   useEffect(() => {
     if (loggedIn) {
-      const jwt = localStorage.getItem("jwt");
+      console.log('1');
+      const jwt = localStorage.getItem('jwt');
       getSevedMoviesCard(jwt);
-      history.push("/movies");
+      //   history.push("/movies");
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [loggedIn]);
 
   return (
-    <div className="body">
+    <div className='body'>
       <CurrentUserContext.Provider value={currentUser}>
         <Header location={pathname} loggedIn={loggedIn} />
         <Switch>
-          <Route exact path="/signin">
+          <Route exact path='/signin'>
             <Login onLogin={onLogin} resError={responseServerError} />
           </Route>
-          <Route exact path="/signup">
+          <Route exact path='/signup'>
             <Register onRegister={onRegister} resError={responseServerError} />
           </Route>
-          <Route exact path="/">
+          <Route exact path='/'>
             <Main />
           </Route>
-          <Route path="/error404">
+          <Route path='/error404'>
             <Error404 />
           </Route>
           <ProtectedRoute
             exact
-            path="/movies"
+            path='/movies'
             loggedIn={loggedIn}
             component={Movies}
             location={pathname}
@@ -209,7 +210,7 @@ function App() {
           />
           <ProtectedRoute
             exact
-            path="/saved-movies"
+            path='/saved-movies'
             loggedIn={loggedIn}
             component={SavedMovies}
             location={pathname}
@@ -218,7 +219,7 @@ function App() {
           />
           <ProtectedRoute
             exact
-            path="/profile"
+            path='/profile'
             loggedIn={loggedIn}
             component={Profile}
             userData={userData}
@@ -226,15 +227,15 @@ function App() {
           />
           <ProtectedRoute
             exect
-            path="/editprofile"
+            path='/editprofile'
             infoStatus={infoStatus}
             loggedIn={loggedIn}
             component={Editprofile}
             onUpdateUser={handleUpdateUser}
             resError={responseServerError}
           />
-          <Route path="*">
-            <Redirect to="/error404" />
+          <Route path='*'>
+            <Redirect to='/error404' />
           </Route>
         </Switch>
         <Footer location={pathname} />

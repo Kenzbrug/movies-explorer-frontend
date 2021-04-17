@@ -1,10 +1,10 @@
-import "./Movies.css";
-import React, { useEffect } from "react";
-import SearchForm from "../SearchForm/SearchForm";
-import Preloader from "../Preloader/Preloader";
-import MoviesCardList from "../MoviesCardList/MoviesCardList";
-import MovieNotFound from "../MovieNotFound/MovieNotFound";
-import { SearchMovies } from "../../utils/SearchMovies";
+import './Movies.css';
+import React, { useState, useEffect } from 'react';
+import SearchForm from '../SearchForm/SearchForm';
+import Preloader from '../Preloader/Preloader';
+import MoviesCardList from '../MoviesCardList/MoviesCardList';
+import MovieNotFound from '../MovieNotFound/MovieNotFound';
+import { SearchMovies } from '../../utils/SearchMovies';
 
 function Movies({
   location,
@@ -19,19 +19,20 @@ function Movies({
     movies,
     setMovies,
     isMovieNotFound,
+    shortFilms,
   } = SearchMovies();
 
   const getLocation = location.pathname;
 
   useEffect(() => {
-    const lastRequest = localStorage.getItem("movies");
+    const lastRequest = localStorage.getItem('movies');
     if (lastRequest) {
       setMovies(JSON.parse(lastRequest));
     }
   }, [setMovies]);
 
   return (
-    <section className="movies">
+    <section className='movies'>
       <SearchForm
         location={getLocation}
         getResultSearchInputFilm={getResultSearchFilm}
