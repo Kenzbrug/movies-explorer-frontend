@@ -1,9 +1,9 @@
 import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
-import "./Register.css";
 import { useInput } from "../../hooks/useFormValidation";
+import "./Register.css";
 
-function Register({ onRegister, resError }) {
+function Register({ onRegister, resError, expectResult, setExpectResult }) {
   const [textResErorr, setTextResErorr] = useState("");
 
   const name = useInput("", { isEmpty: true, minLength: 1, isName: true });
@@ -12,6 +12,7 @@ function Register({ onRegister, resError }) {
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    setExpectResult(true)
     onRegister(name.value, email.value, password.value);
   };
 
@@ -96,15 +97,14 @@ function Register({ onRegister, resError }) {
           )}
           <button
             disabled={
-              !name.inputValid || !email.inputValid || !password.inputValid
+              !name.inputValid || !email.inputValid || !password.inputValid || expectResult
             }
             type="submit"
             onSubmit={handleSubmit}
-            className={`signup__button ${
-              !name.inputValid || !email.inputValid || !password.inputValid
-                ? "signup__button_disabled"
-                : ""
-            }`}
+            className={`signup__button ${!name.inputValid || !email.inputValid || !password.inputValid || expectResult
+              ? "signup__button_disabled"
+              : ""
+              }`}
           >
             Зарегистрироваться
           </button>

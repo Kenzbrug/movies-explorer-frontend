@@ -1,5 +1,5 @@
 import './Movies.css';
-import React, { useState, useEffect } from 'react';
+import React, { useEffect } from 'react';
 import SearchForm from '../SearchForm/SearchForm';
 import Preloader from '../Preloader/Preloader';
 import MoviesCardList from '../MoviesCardList/MoviesCardList';
@@ -19,13 +19,12 @@ function Movies({
     movies,
     setMovies,
     isMovieNotFound,
-    shortFilms,
   } = SearchMovies();
 
   const getLocation = location.pathname;
 
   useEffect(() => {
-    const lastRequest = localStorage.getItem('movies');
+    const lastRequest = localStorage.getItem('findedMovies');
     if (lastRequest) {
       setMovies(JSON.parse(lastRequest));
     }

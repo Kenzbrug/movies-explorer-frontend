@@ -35,7 +35,7 @@ function App() {
   });
   const [responseServerError, setResponseServerError] = useState(null);
   const [infoStatus, setInfoStatus] = useState(false);
-
+  const [expectResult, setExpectResult] = useState(false)
   const history = useHistory();
 
   const handleTokenCheck = (jwt) => {
@@ -50,8 +50,6 @@ function App() {
           setLoggedIn(true);
           // обновляем стейт данных пользователя
           setUserData(getUserData);
-          // при удачной проверке перебрасываем на главную страницу
-          history.push('/movies');
         }
       })
       .catch((err) => {
@@ -63,6 +61,7 @@ function App() {
     return MainApi.register(name, email, password)
       .then((data) => {
         if (data.token) {
+          setExpectResult(false)
           setLoggedIn(true);
           localStorage.setItem('jwt', data.token);
           handleTokenCheck(localStorage.getItem('jwt'));
@@ -71,6 +70,7 @@ function App() {
         }
       })
       .catch((err) => {
+        setExpectResult(false)
         if (err.error === 409) setResponseServerError(409);
         else if (err.error === 400) setResponseServerError(400);
 
@@ -82,6 +82,7 @@ function App() {
     return MainApi.authorize(email, password)
       .then((data) => {
         if (data.token) {
+          setExpectResult(false)
           setLoggedIn(true);
           localStorage.setItem('jwt', data.token);
           handleTokenCheck(localStorage.getItem('jwt'));
@@ -90,6 +91,7 @@ function App() {
         }
       })
       .catch((err) => {
+        setExpectResult(false)
         if (err.error === 401) setResponseServerError(401);
         else if (err.error === 403) setResponseServerError(403);
         console.log(err);
@@ -98,7 +100,6 @@ function App() {
 
   const hendleSignOut = () => {
     localStorage.removeItem('jwt');
-    localStorage.removeItem('movies');
     history.push('/');
     window.location.reload();
     setSaveUserMovies([]);
@@ -107,6 +108,7 @@ function App() {
   const handleUpdateUser = (profileName, profileEmail) => {
     MainApi.setProfileInfo(profileEmail, profileName)
       .then((res) => {
+        setExpectResult(false)
         if (res.error || res.message) {
           setInfoStatus(false);
         } else {
@@ -116,6 +118,7 @@ function App() {
         }
       })
       .catch((err) => {
+        setExpectResult(false)
         setInfoStatus(false);
         if (err.error === 409) setResponseServerError(409);
         else if (err.error === 400) setResponseServerError(400);
@@ -160,26 +163,14 @@ function App() {
       const jwt = localStorage.getItem('jwt');
       getSevedMoviesCard(jwt);
     }
-  }, [loggedIn, history]);
+  }, [loggedIn]);
 
   useEffect(() => {
     const jwt = localStorage.getItem('jwt');
     if (jwt) {
       handleTokenCheck(jwt);
     }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
-
-  // проверяем залогинены мы или нет, чтобы перенаправить на главную страницу с поиском фильмов
-  useEffect(() => {
-    if (loggedIn) {
-      console.log('1');
-      const jwt = localStorage.getItem('jwt');
-      getSevedMoviesCard(jwt);
-      //   history.push("/movies");
-    }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [loggedIn]);
 
   return (
     <div className='body'>
@@ -187,17 +178,17 @@ function App() {
         <Header location={pathname} loggedIn={loggedIn} />
         <Switch>
           <Route exact path='/signin'>
-            <Login onLogin={onLogin} resError={responseServerError} />
+            <Login onLogin={onLogin} resError={responseServerError} setExpectResult={setExpectResult}
+              expectResult={expectResult} />
           </Route>
           <Route exact path='/signup'>
-            <Register onRegister={onRegister} resError={responseServerError} />
+            <Register onRegister={onRegister} resError={responseServerError} setExpectResult={setExpectResult}
+              expectResult={expectResult} />
           </Route>
           <Route exact path='/'>
             <Main />
           </Route>
-          <Route path='/error404'>
-            <Error404 />
-          </Route>
+
           <ProtectedRoute
             exact
             path='/movies'
@@ -228,6 +219,8 @@ function App() {
           <ProtectedRoute
             exect
             path='/editprofile'
+            setExpectResult={setExpectResult}
+            expectResult={expectResult}
             infoStatus={infoStatus}
             loggedIn={loggedIn}
             component={Editprofile}
@@ -236,6 +229,9 @@ function App() {
           />
           <Route path='*'>
             <Redirect to='/error404' />
+          </Route>
+          <Route path='/error404'>
+            <Error404 />
           </Route>
         </Switch>
         <Footer location={pathname} />

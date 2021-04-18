@@ -3,6 +3,7 @@ import { useState, useEffect, useMemo } from 'react';
 import './MoviesCardList.css';
 import MoviesCard from '../MoviesCard/MoviesCard';
 import { useWindowSize } from '../../hooks/useWindowSize';
+import { numberOfFilms } from '../../utils/utils'
 
 function MoviesCardList({
   movies,
@@ -13,12 +14,12 @@ function MoviesCardList({
 }) {
   const [countMovies, setCountMovies] = useState(12);
   const windowSize = useWindowSize();
-
+  const { addMoviesAtWindowSizeMore768px, addMoviesAtWindowSizeLess768px } = numberOfFilms
   const addMoreMovies = () => {
     if (windowSize > 768) {
-      setCountMovies(countMovies + 3);
+      setCountMovies(countMovies + addMoviesAtWindowSizeMore768px);
     } else if (windowSize <= 768) {
-      setCountMovies(countMovies + 2);
+      setCountMovies(countMovies + addMoviesAtWindowSizeLess768px);
     }
   };
 
@@ -35,15 +36,14 @@ function MoviesCardList({
   const lengthDisplayMovies = useMemo(() => {
     return countMovies >= movies.length ? 'movies-list__button_hidden' : '';
   }, [countMovies, movies]);
-
   return (
     <div className='movies-list'>
       <ul className='movies-list__lists'>
         {/* отрисовываем карточки */}
-        {movies.slice(0, countMovies).map((movie, index) => {
+        {movies.slice(0, countMovies).map((movie, id) => {
           return (
             <MoviesCard
-              key={movie._id}
+              key={id}
               movie={movie}
               location={location}
               clickLikeButton={clickLikeButton}

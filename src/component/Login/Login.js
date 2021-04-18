@@ -4,7 +4,7 @@ import "./Login.css";
 
 import { useInput } from "../../hooks/useFormValidation";
 
-function Login({ onLogin, resError }) {
+function Login({ onLogin, resError, expectResult, setExpectResult }) {
   const [textResErorr, setTextResErorr] = useState("");
   const email = useInput("", { isEmpty: true, isEmail: true });
   const password = useInput("", { isEmpty: true, minLength: 1 });
@@ -19,6 +19,7 @@ function Login({ onLogin, resError }) {
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    setExpectResult(true)
     onLogin(email.value, password.value);
   };
 
@@ -73,14 +74,13 @@ function Login({ onLogin, resError }) {
             <></>
           )}
           <button
-            disabled={!email.inputValid || !password.inputValid}
+            disabled={!email.inputValid || !password.inputValid || expectResult}
             onSubmit={handleSubmit}
             type="submit"
-            className={`signin__button ${
-              !email.inputValid || !password.inputValid
+            className={`signin__button ${!email.inputValid || !password.inputValid || expectResult
                 ? "signin__button_disabled"
                 : ""
-            }`}
+              }`}
             tupe="button"
           >
             Войти

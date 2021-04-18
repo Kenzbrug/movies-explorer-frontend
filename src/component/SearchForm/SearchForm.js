@@ -24,7 +24,7 @@ function SearchForm({ getResultSearchInputFilm, onShortFilm, location }) {
   };
 
   const enterFilm = (string) => {
-    return string.charAt(0).toUpperCase() + string.slice(1);
+    return string.charAt(0) + string.slice(1);
   };
   const handleChangeSearchInput = (e) => {
     setSearchFilm(enterFilm(e.target.value));
@@ -34,15 +34,14 @@ function SearchForm({ getResultSearchInputFilm, onShortFilm, location }) {
     setPlaceholderShow(false);
     setPlaceHolder('Фильм');
   };
-  console.log(` longFilmOn ${longFilmOn}`);
 
   const handleClickShortFilm = () => {
     if (longFilmOn === true) {
       setlongFilmOn(false);
-      onShortFilm(true);
+      onShortFilm(false);
     } else {
       setlongFilmOn(true);
-      onShortFilm(false);
+      onShortFilm(true);
     }
   };
   return (
@@ -51,11 +50,10 @@ function SearchForm({ getResultSearchInputFilm, onShortFilm, location }) {
         <form className='search-form__form' onSubmit={handleSubmit}>
           <div className='search-form__input-container'>
             <input
-              className={`search-form__input ${
-                isPlaceholderShow
-                  ? 'search-form__input-enter-empty search-form__input-enter-empty-placeHolder'
-                  : ''
-              }`}
+              className={`search-form__input ${isPlaceholderShow
+                ? 'search-form__input-enter-empty search-form__input-enter-empty-placeHolder'
+                : ''
+                }`}
               value={searchFilm}
               onChange={handleChangeSearchInput}
               onBlur={handleEmptySearchQuery}

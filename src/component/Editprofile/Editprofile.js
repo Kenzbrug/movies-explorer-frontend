@@ -3,11 +3,12 @@ import { useContext, useState, useEffect } from "react";
 import { useInput } from "../../hooks/useFormValidation";
 import CurrentUserContext from "../../contexts/CurrentUserContext";
 
-function Editprofile({ onUpdateUser, resError, infoStatus }) {
+function Editprofile({ onUpdateUser, resError, infoStatus, expectResult, setExpectResult }) {
   const currentUser = useContext(CurrentUserContext);
   const [name, setName] = useState(" ");
   const [email, setEmail] = useState(" ");
   const [textResErorr, setTextResErorr] = useState("");
+
   const validName = useInput("", { isEmpty: true, minLength: 1, isName: true });
   const validEmail = useInput("", { isEmpty: true, isEmail: true });
 
@@ -19,6 +20,7 @@ function Editprofile({ onUpdateUser, resError, infoStatus }) {
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    setExpectResult(true)
     onUpdateUser(validName.value, validEmail.value);
   };
 
@@ -42,7 +44,7 @@ function Editprofile({ onUpdateUser, resError, infoStatus }) {
               autoComplete="off"
               required
               type="text"
-              value={validName.value || name || ""}
+              value={validName.value || name || " "}
               onChange={(e) => validName.onChange(e)}
               onBlur={(e) => validName.onBlur(e)}
             />
@@ -68,7 +70,7 @@ function Editprofile({ onUpdateUser, resError, infoStatus }) {
               autoComplete="off"
               required
               type="email"
-              value={validEmail.value || email || ""}
+              value={validEmail.value || email || " "}
               onChange={(e) => validEmail.onChange(e)}
               onBlur={(e) => validEmail.onBlur(e)}
             />
@@ -100,14 +102,13 @@ function Editprofile({ onUpdateUser, resError, infoStatus }) {
 
           {/* <span className='editprofile__res-server-error'>{textResErorr || ''}</span> */}
           <button
-            disabled={!validName.inputValid || !validEmail.inputValid}
+            disabled={!validName.inputValid || !validEmail.inputValid || expectResult}
             onSubmit={handleSubmit}
             type="submit"
-            className={`editprofile__button-save ${
-              !validName.inputValid || !validEmail.inputValid
-                ? "editprofile__button_disabled"
-                : ""
-            }`}
+            className={`editprofile__button-save ${expectResult || !validName.inputValid || !validEmail.inputValid
+              ? "editprofile__button_disabled"
+              : ""
+              }`}
             tupe="button"
           >
             Сохранить

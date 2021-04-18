@@ -130,20 +130,23 @@
 .navigation__page-is-active {
     font-weight: 500;
 }
+.navigation__menu {
+    background-image: url(../../images/menu-item.svg);
+    background-position: center;
+    outline: none;
+    height: 38px;
+    width: 38px;
+    top: 18px;
+    right: 30px;
+    position: absolute;
+    cursor: pointer;
+    visibility: hidden;
+    z-index: 30;
+}
 
 @media screen and (max-width: 768px) {
     .navigation__menu {
-        background-image: url(../../images/menu-item.svg);
-        background-position: center;
-        outline: none;
-        height: 38px;
-        width: 38px;
-        top: 18px;
-        right: 30px;
-        position: absolute;
-        cursor: pointer;
-        /* visibility: hidden; */
-        z-index: 30;
+        visibility: visible;
     }
     .navigation {
         display: flex;

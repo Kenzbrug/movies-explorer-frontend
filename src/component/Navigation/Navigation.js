@@ -18,16 +18,16 @@ function Navigation({
 
   return (
     <nav className={`navigation ${clickMenu ? "navigation__active" : ""}`}>
-      <div
-        className={`navigation__menu 
-            ${
-              location === "/"
-                ? "navigation__menu-item-close_hidden navigation__menu_hidden"
-                : "navigation__menu_active "
+      {loggedIn ?
+        (<div
+          className={`navigation__menu 
+            ${location === "/"
+              ? "navigation__menu-item-close_hidden navigation__menu_hidden"
+              : "navigation__menu_active "
             } 
              ${clickMenu ? "navigation__menu-item-close" : ""}`}
-        onClick={handleClickMenu}
-      ></div>
+          onClick={handleClickMenu}
+        ></div>) : (<></>)}
       {!loggedIn === true ? (
         <div className="navigation__container">
           <Link className="navigation__signup-button" to="/signup">
@@ -43,9 +43,8 @@ function Navigation({
         ""
       ) : (
         <div
-          className={`navigation__links ${
-            clickMenu ? "navigation__links_active" : ""
-          }`}
+          className={`navigation__links ${clickMenu ? "navigation__links_active" : ""
+            }`}
         >
           <ul className="navigation__lists">
             <li className="navigation__list">
