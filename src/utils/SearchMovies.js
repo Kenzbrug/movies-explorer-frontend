@@ -42,7 +42,7 @@ export function SearchMovies() {
   const getResultSearchFilm = (enterWord) => {
     setIsMovieNotFound(false);
     setPreloaderShow(true);
-    localStorage.findedMovies ? localStorageMovies(enterWord) :
+    localStorage.arrayMovies ? localStorageMovies(enterWord) :
       getMovie()
         .then((movies) => {
           localStorage.setItem('arrayMovies', JSON.stringify(movies));

@@ -73,8 +73,7 @@ function App() {
         setExpectResult(false)
         if (err.error === 409) setResponseServerError(409);
         else if (err.error === 400) setResponseServerError(400);
-
-        console.log(err.error);
+        console.log(err);
       });
   };
 
