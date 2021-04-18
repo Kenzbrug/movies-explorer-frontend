@@ -20,7 +20,6 @@ export const getContent = (token) => {
 };
 
 export const register = (name, email, password) => {
-  console.log(name, email, password);
   return fetch(`${URL}/signup`, {
     method: "POST",
     headers: {

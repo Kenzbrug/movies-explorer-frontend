@@ -1,5 +1,4 @@
 import "./SavedMovies.css";
-import { useEffect } from 'react';
 import MoviesCardList from "../MoviesCardList/MoviesCardList";
 import SearchForm from "../SearchForm/SearchForm";
 import Preloader from "../Preloader/Preloader";
@@ -15,15 +14,7 @@ function SavedMovies({ location, loggedIn, savesUserMovie, removeMovie }) {
     isMovieNotFound,
     saveAlreadyMovies,
     searchInSaveMovies,
-    setMovies
   } = SearchMovies();
-
-  useEffect(() => {
-    const lastRequest = localStorage.getItem('saveFindedMovies');
-    if (lastRequest) {
-      setMovies(JSON.parse(lastRequest));
-    }
-  }, [setMovies]);
 
   return (
     <section className="seved-movies">
