@@ -102,6 +102,7 @@ function App() {
     history.push('/');
     window.location.reload();
     setSaveUserMovies([]);
+    localStorage.removeItem('findedMovies');
   };
 
   const handleUpdateUser = (profileName, profileEmail) => {

@@ -47,7 +47,7 @@ function MoviesCard({
   return (
     <li className='movie'>
       <a
-        href={location === '/saved-movies' ? movie.trailer : movie.trailerLink}
+        href={movie.trailerLink}
         target='blank'
         className='movie__trailer'
       >
@@ -70,8 +70,8 @@ function MoviesCard({
               location === '/saved-movies'
                 ? movieDeleteButtonClassName
                 : handlebuttonLikeActive()
-                ? movieLikeButtonClassName
-                : 'movie__button movie__button_like'
+                  ? movieLikeButtonClassName
+                  : 'movie__button movie__button_like'
             }
             type='button'
             aria-label='кнопка-сердечко, нравится'

@@ -74,7 +74,7 @@ export function SearchMovies() {
               : '';
         });
         if (arrayFilterDurationMovies.length === 0) return setIsMovieNotFound(true);
-        localStorage.setItem('findedMovies', JSON.stringify(arrayFilterDurationMovies));
+        localStorage.setItem('saveFindedMovies', JSON.stringify(arrayFilterDurationMovies));
         setSaveAlreadyMovies(arrayFilterDurationMovies)
       })
       .finally(() => {

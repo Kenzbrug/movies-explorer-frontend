@@ -72,11 +72,11 @@ export const savedMovie = (movieData, jwt) => {
       year: movieData.year,
       description: movieData.description,
       image: `${urlWithMovies}${movieData.image.url}`,
-      trailer: movieData.trailerLink,
+      trailerLink: movieData.trailerLink,
       nameRU: movieData.nameRU,
       nameEN: movieData.nameEN,
       thumbnail: movieData.trailerLink,
-      movieId: movieData.id,
+      id: movieData.id,
       owner: movieData.owner,
     }),
   }).then((res) => handleRes(res));
